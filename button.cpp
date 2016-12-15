@@ -1,4 +1,3 @@
-#include <iostream>
 #include "button.h"
 
 using namespace std;
@@ -9,7 +8,7 @@ button::button() {
 }
 
 
-button::button(string name, sf::Vector2f position) {
+button::button(string name, Vector2f position) {
 
 	m_path = "images/.png";
 	m_path.insert(7, name);

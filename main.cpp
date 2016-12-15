@@ -24,8 +24,8 @@ int main()
     
     //Initialisation des boutons
     button backGround("background", Vector2f(0, 0));
-    /*
     button newgame("newgame", Vector2f(50, 150));
+    /*
     button loadGame("load", Vector2f(50, 250));
     button leave("leave", Vector2f(50, 350));
     button classic("classic", Vector2f(300, 150));
@@ -61,7 +61,10 @@ int main()
         backGround.drawButton(window);
 
 
-        
+        if(game.getGameState() == "MENU1") {
+            if(newgame.isClicked(window))
+                game.setGamestate("RUN");
+        }
 
 
        

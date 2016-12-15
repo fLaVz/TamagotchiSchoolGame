@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include <sstream>
 
 using namespace std;
 
@@ -26,12 +27,10 @@ void Engine::load() {
 
     if(file) {
 
-  		
-    	
-   	 		
     	string tab[10];
     	int i = 0;
 
+      string line;
     	istringstream iss(line);
   		string s;
 
@@ -44,6 +43,5 @@ void Engine::load() {
     }
     else {
     	cerr << "Impossible d'ouvrir le fichier !" << endl;
-    }   
-
+    }  
 }

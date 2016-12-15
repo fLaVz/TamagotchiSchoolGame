@@ -1,5 +1,5 @@
 game:		main.o Engine.o button.o
-			g++ *.o -o game -L SFML -lsfml-graphics -lsfml-window -lsfml-system
+			g++ *.o -o game -L SFML/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 main.o:		main.cpp Engine.h
 			g++ -c main.cpp -I SFML/include
