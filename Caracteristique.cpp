@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h> // atoi
+#include <ctime> 	// time
 #include "Caracteristique.h"
 //#include "Session.h" // date pour les fonctions de fatigue et experience ?
 
