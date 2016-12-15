@@ -13,4 +13,4 @@ class Session
 	string get_fin();
 	void set_derniere(string);
 	string get_derniere();
-}
+};

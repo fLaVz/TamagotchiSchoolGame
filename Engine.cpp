@@ -20,7 +20,30 @@ string Engine::getGameState() {
 }
 
 
-Engine::loadGame() {
+void Engine::load() {
 
-	
+	ifstream file("saved/save.dat", ios::in);  // on ouvre le fichier
+
+    if(file) {
+
+  		
+    	
+   	 		
+    	string tab[10];
+    	int i = 0;
+
+    	istringstream iss(line);
+  		string s;
+
+  		while (getline(iss, s, ' ' ) ) {
+    		printf( "`%s'\n", s.c_str() );
+    		tab[i] = s.c_str();
+  		}
+
+    	file.close();
+    }
+    else {
+    	cerr << "Impossible d'ouvrir le fichier !" << endl;
+    }   
+
 }

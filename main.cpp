@@ -13,6 +13,7 @@ int main()
 
     // Initialisation du jeu
     Engine game;
+    game.load();
     
     
     //Initialisation de la fenetre de rendu

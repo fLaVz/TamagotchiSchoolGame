@@ -2,6 +2,7 @@
 #define jeu_H
 
 #include <iostream>
+#include <fstream>
 #include <SFML/Graphics.hpp>
 
 using namespace std;
@@ -20,8 +21,8 @@ public:
 	void setGameState(string gameState);
 	string getGameState();
 	/////////////////////////////////////////////////
-	
-	void loadGame();
+
+	void load();
 	
 
 };
