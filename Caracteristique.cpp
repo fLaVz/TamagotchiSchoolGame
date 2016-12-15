@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h> // atoi
 #include "Caracteristique.h"
+//#include "Session.h" // date pour les fonctions de fatigue et experience ?
 
 using namespace std;
 
@@ -74,32 +75,37 @@ using namespace std;
 		return multiplicateur;
 	}
 	
+	//Fonction qui réduit la faim
 	void Caracteristique::manger()
 	{
 		int faim = atoi(get_faim());
-		return set_faim(faim+10);
+		set_faim(faim-10);
 	}
 	
+	//Fonction qui augmente la propreté
 	void Caracteristique::laver()
 	{
 		int lave = atoi(get_proprete());
-		return set_proprete(lave+10);
+		set_proprete(lave+10);
 	}
 	
+	//Fonction qui augmente la vie
 	void Caracteristique::soigner()
 	{
 		int soin = atoi(get_vie());
-		return set_vie(soin+10);
+		set_vie(soin+10);
 	}
 	
+	//Fonction qui augmente l'humeur et la fatigue
 	void Caracteristique::jouer()
 	{
 		int joue = atoi(get_humeur());
-		fatigue();
-		
+		int fatiguee = atoi(get_fatigue());
+		set_humeur(joue+10);
+		set_fatigue(fatiguee+10);
 	}
 	
-	void Caracteristique::fatigue()
+	/*void Caracteristique::dormir() // fonction qui régénère la fatigue suivant le temps entre deux sessions.
 	{
 		
-	}
+	}*/

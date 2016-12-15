@@ -30,6 +30,6 @@ class Caracteristique
 	void laver();
 	void soigner();
 	void jouer();
-	void fatigue();
+	//void dormir();
 	
 };
