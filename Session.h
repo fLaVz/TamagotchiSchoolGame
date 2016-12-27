@@ -13,4 +13,10 @@ class Session
 	string get_fin();
 	void set_derniere(string);
 	string get_derniere();
+	string get_time();
+	int compare_day(string, string);
+	int compare_month(string, string);
+	int compare_hours(string, string);
+	int compare_minutes(string, string);
+	
 };

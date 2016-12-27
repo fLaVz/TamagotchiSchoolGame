@@ -35,16 +35,6 @@ using namespace std;
 		return derniere;
 	}
 	
-	/*
-	// fonction qui renvoie l'heure courante
-	string Session::time()
-	{
-		time_t timer;
-		time(&timer);
-		return ctime(&timer);
-		
-	}
-	
 	// fonction qui renvoie la date m/j/a h:min:s
 	string Session::get_time()
 	{
@@ -61,6 +51,89 @@ using namespace std;
 		return s;
 	}
 	
+	// fonction qui compare les jours de deux dates (début,fin)
+	int Session::compare_day(string d, string d2)
+	{
+		string str;
+		string str2;
+		str = d.substr(3,2);
+		str2 = d2.substr(3,2);
+		int tmp;
+		int tmp2;
+		tmp = stoi(str);	//stoi = atoi en plus récent
+		tmp2 = stoi(str2);
+		if(tmp == tmp2)
+		{
+			return 0;
+		}
+		else
+		{
+			return (tmp2 - tmp);
+		}
+	}
 	
+	// fonction qui compare les mois de deux dates (début, fin)
+	int Session::compare_month(string m, string m2)
+	{
+		string str;
+		string str2;
+		str = m.substr(0,2);
+		str2 = m2.substr(0,2);
+		int tmp;
+		int tmp2;
+		tmp = stoi(str);
+		tmp2 = stoi(str2);
+		if(tmp == tmp2)
+		{
+			return 0;
+		}
+		else
+		{
+			return (tmp2 - tmp);
+		}
+	}
 	
-	*/
+	// fonction qui compare les heures de deux dates (début, fin)
+	int Session::compare_hours(string h, string h2)
+	{
+		string str;
+		string str2;
+		str = h.substr(11,2);
+		str2 = h2.substr(11,2);
+		int tmp;
+		int tmp2;
+		tmp = stoi(str);
+		tmp2 = stoi(str2);
+		if(tmp == tmp2)
+		{
+			return 0;
+		}
+		else
+		{
+			return (tmp2 - tmp);
+		}
+	}
+	
+	// fonction qui compare les minutes de deux dates (début, fin)
+	int Session::compare_minutes(string mi, string mi2)
+	{
+		string str;
+		string str2;
+		str = mi.substr(14,2);
+		str2 = mi2.substr(14,2);
+		int tmp;
+		int tmp2;
+		tmp = stoi(str);
+		tmp2 = stoi(str2);
+		if(tmp == tmp2)
+		{
+			return 0;
+		}
+		else
+		{
+			return (tmp2 - tmp);
+		}
+	}
+	
+	//TODO : faire le mixe des fonctions de comparaison des dates afin de vérifier comment gérer les caractéristiques plus tard. Plus vérifier par rapport aux changements de mois/jour/heure
+
