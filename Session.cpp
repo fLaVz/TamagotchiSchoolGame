@@ -35,7 +35,7 @@ using namespace std;
 		return derniere;
 	}
 	
-	// fonction qui renvoie la date m/j/a h:min:s
+	// Fonction qui renvoie la date m/j/a h:min:s
 	string Session::get_time()
 	{
 		time_t rawtime;
@@ -51,7 +51,7 @@ using namespace std;
 		return s;
 	}
 	
-	// fonction qui compare les jours de deux dates (début,fin)
+	// Fonction qui compare les jours de deux dates (début,fin)
 	int Session::compare_day(string d, string d2)
 	{
 		string str;
@@ -72,7 +72,7 @@ using namespace std;
 		}
 	}
 	
-	// fonction qui compare les mois de deux dates (début, fin)
+	// Fonction qui compare les mois de deux dates (début, fin)
 	int Session::compare_month(string m, string m2)
 	{
 		string str;
@@ -93,7 +93,7 @@ using namespace std;
 		}
 	}
 	
-	// fonction qui compare les heures de deux dates (début, fin)
+	// Fonction qui compare les heures de deux dates (début, fin)
 	int Session::compare_hours(string h, string h2)
 	{
 		string str;
@@ -114,7 +114,7 @@ using namespace std;
 		}
 	}
 	
-	// fonction qui compare les minutes de deux dates (début, fin)
+	// Fonction qui compare les minutes de deux dates (début, fin)
 	int Session::compare_minutes(string mi, string mi2)
 	{
 		string str;
@@ -136,4 +136,43 @@ using namespace std;
 	}
 	
 	//TODO : faire le mixe des fonctions de comparaison des dates afin de vérifier comment gérer les caractéristiques plus tard. Plus vérifier par rapport aux changements de mois/jour/heure
+	
+	/*
+	//Fonction qui gère les caractéristiques suivant le temps entre deux sessions
+	void Session::up_caracteristics(string start, string end)
+	{
+		if(compare_day(start,end) >= 1 || compare_day(start,end) <= -1 || compare_month(start,end) >= 1 || compare_month(start,end) <= -1)
+		{
+			Tamagotchi::set_vie(0);
+		}
+		if(compare_hours(start,end) >= 12 || compare_hours(start,end) <= -12)
+		{
+			int vie = Tamagotchi::get_vie();
+			Tamagotchi::set_vie(vie-60);
+			int faim = Tamagotchi::get_faim();
+			Tamagotchi::set_faim(faim+60);
+			int humeur = Tamagotchi::get_humeur();
+			Tamagotchi::set_humeur(humeur-60);
+		}
+		if((compare_hours(start,end) >=6 && compare_hours(start,end) < 12) || (compare_hours(start,end) <= -6 && compare_hours(start,end) > -12))
+		{
+			int vie = Tamagotchi::get_vie();
+			Tamagotchi::set_vie(vie-30);
+			int faim = Tamagotchi::get_faim();
+			Tamagotchi::set_faim(faim+30);
+			int humeur = Tamagotchi::get_humeur();
+			Tamagotchi::set_humeur(humeur-30);
+		}
+		if(compare_hours(start,end) < 6 || compare_hours(start,end) > -6)
+		{
+			int vie = Tamagotchi::get_vie();
+			Tamagotchi::set_vie(vie-10);
+			int faim = Tamagotchi::get_faim();
+			Tamagotchi::set_faim(faim+10);
+			int humeur = Tamagotchi::get_humeur();
+			Tamagotchi::set_humeur(humeur-10);
+		}
+	}
+	
+	*/
 

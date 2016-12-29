@@ -2,21 +2,21 @@
 
 class Session
 {
-	string debut; 		// date de début de session
-	string fin; 		// date de fin de session 
-	string derniere;	// date de la dernière session
+	std::string debut; 		// date de début de session
+	std::string fin; 		// date de fin de session 
+	std::string derniere;	// date de la dernière session
 	
 	public:
-	void set_debut(string);
-	string get_debut();
-	void set_fin(string);
-	string get_fin();
-	void set_derniere(string);
-	string get_derniere();
-	string get_time();
-	int compare_day(string, string);
-	int compare_month(string, string);
-	int compare_hours(string, string);
-	int compare_minutes(string, string);
-	
+	void set_debut(std::string);
+	std::string get_debut();
+	void set_fin(std::string);
+	std::string get_fin();
+	void set_derniere(std::string);
+	std::string get_derniere();
+	std::string get_time();
+	int compare_day(std::string, std::string);
+	int compare_month(std::string, std::string);
+	int compare_hours(std::string, std::string);
+	int compare_minutes(std::string, std::string);
+	//void up_caracteristics(std::string, std::string)
 };

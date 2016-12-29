@@ -170,10 +170,23 @@ Tamagotchi::Tamagotchi() {
 		//int joue = atoi(get_humeur());
 		int fatiguee = get_fatigue();
 		//set_humeur(joue+10);
-		set_fatigue(fatigue+10);
+		set_fatigue(fatiguee+10);
 	}
 	
-	/*void Tamagotchi::dormir() // fonction qui régénère la fatigue suivant le temps entre deux sessions.
+	/*void Tamagotchi::dormir() // fonction qui régénère la fatigue suivant le temps entre deux sessions?
 	{
 		
-	}*/
+	}
+	
+	bool Tamagotchi::mort()
+	{
+		if(get_vie() == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	*/

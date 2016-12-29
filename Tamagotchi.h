@@ -58,5 +58,6 @@ class Tamagotchi
 	void soigner();
 	void jouer();
 	//void dormir();
+	//bool mort();
 };
 #endif
