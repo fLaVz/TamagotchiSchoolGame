@@ -5,7 +5,7 @@ using namespace std;
 
 Engine::Engine() {
 
-	m_gameState = "INIT";
+	m_gameState = "MENU1";
 
 }
 
@@ -21,9 +21,15 @@ string Engine::getGameState() {
 }
 
 
+void Engine::action(string act) {
+
+
+}
+
+
 void Engine::load() {
 
-	ifstream file("saved/save.dat", ios::in);  // on ouvre le fichier
+	/*ifstream file("saved/save.dat", ios::in);  // on ouvre le fichier
 
     if(file) {
 
@@ -43,5 +49,5 @@ void Engine::load() {
     }
     else {
     	cerr << "Impossible d'ouvrir le fichier !" << endl;
-    }  
+    } */ 
 }
