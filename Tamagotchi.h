@@ -17,7 +17,7 @@ class Tamagotchi
 	int vie;
 	int faim;
 	int proprete;
-	std::string humeur;
+	int humeur;
 	int fatigue;
 	int experience;
 	int multiplicateur;
@@ -45,7 +45,7 @@ class Tamagotchi
 	void set_proprete(int);
 	int get_proprete();
 	void set_humeur(int);
-	std::string get_humeur();
+	int get_humeur();
 	void set_fatigue(int);
 	int get_fatigue();
 	void set_experience(int);

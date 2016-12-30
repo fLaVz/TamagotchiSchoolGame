@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <SFML/Graphics.hpp>
+#include "Tamagotchi.h"
 
 
 //CETTE CLASSE CONTIENT LES PARAMETRES DU JEU

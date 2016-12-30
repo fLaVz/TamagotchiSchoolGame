@@ -13,7 +13,7 @@ Tamagotchi::Tamagotchi() {
 	vie = 100;
 	faim = 0;
 	proprete = 100;
-	humeur = "default";
+	humeur = 100;
 	fatigue = 0;
 	experience = 0;
 	multiplicateur = 1;
@@ -108,7 +108,7 @@ Tamagotchi::Tamagotchi() {
 		humeur = i;
 	}
 	
-	string Tamagotchi::get_humeur()
+	int Tamagotchi::get_humeur()
 	{
 		return humeur;
 	}
@@ -148,6 +148,12 @@ Tamagotchi::Tamagotchi() {
 	{
 		int faim = get_faim();
 		set_faim(faim-10);
+
+		if(faim <= 0) {					// Pour éviter le "gavage"
+			set_vie(vie-20);
+		} 
+
+
 	}
 	
 	//Fonction qui augmente la propreté

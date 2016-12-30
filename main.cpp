@@ -4,6 +4,7 @@
 #include "Engine.h"
 #include "button.h"
 #include "Tamagotchi.h"
+#include "text.h"
 
 
 using namespace std;
@@ -17,11 +18,10 @@ int main()
     Engine game;
     Tamagotchi t;
     
-    
-    //Initialisation de la fenetre de rendu
+    // Initialisation de la fenetre de rendu
     RenderWindow window(VideoMode(1280, 720), "TAMAGOTCHI v1.0");
     
-    //Initialisation des boutons
+    // Initialisation des boutons
     button backGround("background", Vector2f(0, 0));
     button newgame("newgame", Vector2f(280, 300));
     button cont("continue", Vector2f(700, 300));
@@ -29,21 +29,24 @@ int main()
     button goSleep("sleep", Vector2f(350, 500));
     button goOut("out", Vector2f(650, 500));
     button proceed("continue", Vector2f(500, 300));
-    
-/*
-    button perso("perso", Vector2f(300, 250));
-    button pvp("pvp", Vector2f(150, 250));
-    button pvia("pvia", Vector2f(450, 250));
-    button save("save", Vector2f(100, 350));
-    button load("load", Vector2f(450, 450));
-   
-    button newgamepause("newgame", Vector2f(250, 450));
-    */
+      
+    //button newgamepause("newgame", Vector2f(250, 450));
+
+    // Initialisation des texts afichés a l'écran avec leur couleurs
+    Color red = Color::Red;
+    Color green = Color::Green;
+    Color white = Color::White;
+
+    text life("Vie :", green, 1000, 200);
+    text faim("Faim :", red, 1000, 250);
+    text proprete("Proprete :", white, 1000, 300);
+    text fatigue("Fatigue :", white, 1000, 350);
+    text humeur("Humeur :", white, 1000, 400);   
 
 
-    ///////////PARTIE INTERFACE GRAPHIQUE/////////////////////
+    /////////////////PARTIE INTERFACE GRAPHIQUE/////////////////////
 
-    // Boucle de jeu avec un gamestate pour gerer ou non l'interface graphique
+    // Boucle de jeu avec un gamestate pour gerer l'interface graphique
     while(window.isOpen())
     {
     
@@ -76,6 +79,12 @@ int main()
 
 
         if(game.getGameState() == "RUN") {
+
+            life.drawText(window);
+            faim.drawText(window);
+            proprete.drawText(window);
+            fatigue.drawText(window);
+            humeur.drawText(window);
 
             food.drawButton(window);
             goSleep.drawButton(window);
