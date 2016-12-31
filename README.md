@@ -19,7 +19,9 @@ Makefile :
 	-make mrproper -> Nettoie entierement le dossier
 	
 Si, malgrès tout ça, cela ne fonctionne pas, vous pouvez installer la SFML sur le pc :
+
 	-sudo apt-get install libsfml-dev
 	
 Le projet est entièrement disponible sur github à l'adresse :
+
 https://github.com/fLaVz/TamagotchiSchoolGame
