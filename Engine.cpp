@@ -27,43 +27,49 @@ void Engine::action(string act) {
 }
 
 
-void Engine::load() {
+void Engine::load(Tamagotchi & t) {
 
   string chaine[10];
   int num[10];
 
-	/*ifstream file("saved/save.dat", ios::in);  // on ouvre le fichier
+	ifstream file("saved/save.dat", ios::in);  // on ouvre le fichier
 
     if(file) {
-
-    	string tab[10];
-    	int i = 0;
-
       string line;
-    	istringstream iss(line);
-  		string s;
-
-  		while (getline(iss, s, ' ' ) ) {
-    		printf( "`%s'\n", s.c_str() );
-    		tab[i] = s.c_str();
-  		}
-
-    	file.close();
+      
+      for(int i = 0; i < 5; i++) {
+        getline(file, line);
+        chaine[i] = line;
+      }
+      
+      for(int i = 0; i < 7; i++) {
+        getline(file, line);
+        int tmp = atoi(line.c_str());
+        num[i] = tmp;
+      }
+      file.close();
     }
     else {
     	cerr << "Impossible d'ouvrir le fichier !" << endl;
-    } */ 
+    }
+
+
+    t.set_nom(chaine[0]);
+    t.set_type(chaine[1]);
+    t.set_genre(chaine[2]);
+    t.set_temperament(chaine[3]);
+    t.set_date(chaine[4]);
+
+    t.set_vie(num[0]);
+    t.set_faim(num[1]);
+    t.set_proprete(num[2]);
+    t.set_humeur(num[3]);
+    t.set_fatigue(num[4]);
+    t.set_experience(num[5]);
+    t.set_multiplicateur(num[6]);
+
+    cout << "Game successfully loaded" << endl;
 }
-/*
-
-Schema pour la sauvegarde fichier :
-
-cf Tamagotchi.h -> meme architecture string + int
-
-
-
-
-*/
 
 void Engine::save(Tamagotchi t) {
 
@@ -73,14 +79,14 @@ void Engine::save(Tamagotchi t) {
 
       if(file) {
 
-        file << "[STRING]" << endl;
+        //file << "[STRING]" << endl;
         file << t.get_nom() << endl;
         file << t.get_type() << endl;
         file << t.get_genre() << endl;
         file << t.get_temperament() << endl;
         file << t.get_date() << endl;
 
-        file << "[INT]" << endl;
+        //file << "[INT]" << endl;
         file << t.get_vie() << endl;
         file << t.get_faim() << endl;
         file << t.get_proprete() << endl;
@@ -97,4 +103,10 @@ void Engine::save(Tamagotchi t) {
 
   cout << "game succesfully saved !" << endl;
 
+}
+
+
+void Engine::update(Tamagotchi t) {
+
+  
 }

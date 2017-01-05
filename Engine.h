@@ -25,11 +25,12 @@ public:
 	std::string getGameState();
 	/////////////////////////////////////////////////
 
-	void load();
+	void load(Tamagotchi & t);
 	void save(Tamagotchi t);
 
 
 	void action(std::string act);
+	void update(Tamagotchi t);
 	
 
 };

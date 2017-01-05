@@ -53,8 +53,10 @@ int main()
     
         Event event;                            // Traite les évènements
         while(window.pollEvent(event)) {
-            if(event.type == Event::Closed)     // Si on click sur la croix rouge
-                window.close(); 
+            if(event.type == Event::Closed) {    // Si on click sur la croix rouge
+                game.save(t);
+                window.close();
+            }
             if(event.type == Event::KeyPressed) {
                 // Si la touche echap est préssée et qu'on est dans une partie
                 if(event.key.code == Keyboard::Escape && game.getGameState() == "RUN")
@@ -73,7 +75,7 @@ int main()
             if(newgame.isClicked(window)) {
                 game.setGameState("RUN");
             }else if(cont.isClicked(window)) {
-                game.load();
+                game.load(t);
                 game.setGameState("RUN");
             }
         }   

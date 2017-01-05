@@ -1,11 +1,9 @@
-[STRING]
 name
 type
 gender
 temp
 default
-[INT]
-120
+140
 0
 100
 100
