@@ -86,7 +86,7 @@ void Engine::save(Tamagotchi t) {
         file << t.get_temperament() << endl;
         file << t.get_date() << endl;
 
-        //file << "[INT]" << endl;
+        //file << "[INT]" << endl;m
         file << t.get_vie() << endl;
         file << t.get_faim() << endl;
         file << t.get_proprete() << endl;
@@ -106,7 +106,16 @@ void Engine::save(Tamagotchi t) {
 }
 
 
-void Engine::update(Tamagotchi t) {
+void Engine::update(Tamagotchi & t, text & life) {
 
-  
+  int tmp = t.get_vie();
+
+  stringstream flux;
+  flux << tmp;
+
+  string conv = flux.str();
+
+  life.addText(conv);
+
+
 }

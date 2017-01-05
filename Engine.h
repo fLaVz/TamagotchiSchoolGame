@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "Tamagotchi.h"
 #include "Session.h"
+#include "text.h"
 
 
 //CETTE CLASSE CONTIENT LES PARAMETRES DU JEU
@@ -30,7 +31,7 @@ public:
 
 
 	void action(std::string act);
-	void update(Tamagotchi t);
+	void update(Tamagotchi & t, text & life);
 	
 
 };

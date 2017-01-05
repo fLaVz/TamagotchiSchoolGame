@@ -31,3 +31,11 @@ void text::drawText(RenderWindow & window) {
 
 	window.draw(mytext);
 }
+
+
+void text::addText(string add) {
+
+    string done = mytext.getString();
+    done.replace(5, 3, add);
+    mytext.setString(done);
+}

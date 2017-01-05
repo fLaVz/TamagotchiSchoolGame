@@ -73,9 +73,11 @@ int main()
             cont.drawButton(window);
 
             if(newgame.isClicked(window)) {
+                game.update(t, life);
                 game.setGameState("RUN");
             }else if(cont.isClicked(window)) {
                 game.load(t);
+                game.update(t, life);
                 game.setGameState("RUN");
             }
         }   
@@ -111,6 +113,7 @@ int main()
             proceed.drawButton(window);
 
             if(proceed.isClicked(window)) {
+                game.update(t, life);
                 game.save(t);
                 game.setGameState("RUN");
             }

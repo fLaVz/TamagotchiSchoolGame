@@ -16,6 +16,7 @@ public:
 	text(std::string m_text, sf::Color mycolor, int x, int y);
 
 	void drawText(sf::RenderWindow & window);
+	void addText(std::string add);
 
 
 };
