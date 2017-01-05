@@ -60,8 +60,8 @@ using namespace std;
 		str2 = d2.substr(3,2);
 		int tmp;
 		int tmp2;
-		tmp = stoi(str);	//stoi = atoi en plus récent
-		tmp2 = stoi(str2);
+		tmp = atoi(str.c_str());	//stoi = atoi en plus récent
+		tmp2 = atoi(str2.c_str());
 		if(tmp == tmp2)
 		{
 			return 0;
@@ -81,8 +81,8 @@ using namespace std;
 		str2 = m2.substr(0,2);
 		int tmp;
 		int tmp2;
-		tmp = stoi(str);
-		tmp2 = stoi(str2);
+		tmp = atoi(str.c_str());
+		tmp2 = atoi(str2.c_str());
 		if(tmp == tmp2)
 		{
 			return 0;
@@ -102,8 +102,8 @@ using namespace std;
 		str2 = h2.substr(11,2);
 		int tmp;
 		int tmp2;
-		tmp = stoi(str);
-		tmp2 = stoi(str2);
+		tmp = atoi(str.c_str());
+		tmp2 = atoi(str2.c_str());
 		if(tmp == tmp2)
 		{
 			return 0;
@@ -123,8 +123,8 @@ using namespace std;
 		str2 = mi2.substr(14,2);
 		int tmp;
 		int tmp2;
-		tmp = stoi(str);
-		tmp2 = stoi(str2);
+		tmp = atoi(str.c_str());
+		tmp2 = atoi(str2.c_str());
 		if(tmp == tmp2)
 		{
 			return 0;
