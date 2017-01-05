@@ -1,3 +1,6 @@
+#ifndef Session_H
+#define Session_H
+
 #include <string>
 
 class Session
@@ -6,6 +9,10 @@ class Session
 	std::string fin; 		// date de fin de session 
 	std::string derniere;	// date de la dernière session
 	
+
+	//debut -> ancienne
+	//fin -> recente
+
 	public:
 	void set_debut(std::string);
 	std::string get_debut();
@@ -20,3 +27,4 @@ class Session
 	int compare_minutes(std::string, std::string);
 	//void up_caracteristics(std::string, std::string)
 };
+#endif

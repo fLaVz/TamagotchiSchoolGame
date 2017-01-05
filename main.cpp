@@ -7,6 +7,7 @@
 #include "text.h"
 
 
+
 using namespace std;
 using namespace sf;
 
@@ -106,8 +107,11 @@ int main()
         if(game.getGameState() == "WAIT") {
             
             proceed.drawButton(window);
-            if(proceed.isClicked(window))
+
+            if(proceed.isClicked(window)) {
+                game.save(t);
                 game.setGameState("RUN");
+            }
         }
 
 

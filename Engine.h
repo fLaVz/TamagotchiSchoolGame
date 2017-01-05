@@ -5,6 +5,7 @@
 #include <fstream>
 #include <SFML/Graphics.hpp>
 #include "Tamagotchi.h"
+#include "Session.h"
 
 
 //CETTE CLASSE CONTIENT LES PARAMETRES DU JEU
@@ -12,6 +13,7 @@
 class Engine {
 
 	std::string m_gameState;
+	Session s;
 	
 
 public: 
@@ -24,6 +26,8 @@ public:
 	/////////////////////////////////////////////////
 
 	void load();
+	void save(Tamagotchi t);
+
 
 	void action(std::string act);
 	
