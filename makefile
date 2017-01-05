@@ -1,4 +1,4 @@
-game:		main.o Engine.o button.o Tamagotchi.o text.o
+game:		main.o Engine.o button.o Tamagotchi.o text.o Session.o
 			g++ *.o -o game -lsfml-graphics -lsfml-window -lsfml-system
 
 main.o:		main.cpp Engine.h button.h Tamagotchi.h
@@ -15,6 +15,9 @@ Engine.o:	Engine.cpp Engine.h Tamagotchi.h
 
 button.o:	button.cpp button.h
 			g++ -c button.cpp -I SFML/include
+
+Session.o: 	Session.cpp Session.h
+			g++ -c Session.cpp -I SFML/include
 
 clean:	
 			rm -f *.o
