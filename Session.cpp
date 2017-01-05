@@ -5,6 +5,11 @@
 
 using namespace std;
 
+	Session::Session()
+	{
+		debut = fin = derniere = get_time();
+	}
+
 	void Session::set_debut(string s)
 	{
 		debut = s;
@@ -98,8 +103,8 @@ using namespace std;
 	{
 		string str;
 		string str2;
-		str = h.substr(11,2);
-		str2 = h2.substr(11,2);
+		str = h.substr(9,2);
+		str2 = h2.substr(9,2);
 		int tmp;
 		int tmp2;
 		tmp = atoi(str.c_str());
@@ -119,8 +124,8 @@ using namespace std;
 	{
 		string str;
 		string str2;
-		str = mi.substr(14,2);
-		str2 = mi2.substr(14,2);
+		str = mi.substr(12,2);
+		str2 = mi2.substr(12,2);
 		int tmp;
 		int tmp2;
 		tmp = atoi(str.c_str());
@@ -129,6 +134,10 @@ using namespace std;
 		{
 			return 0;
 		}
+		else if ((tmp2 - tmp) < 0)
+		{
+			return (-1 * (tmp2-tmp));
+		} 
 		else
 		{
 			return (tmp2 - tmp);
