@@ -1,13 +1,14 @@
 #include <iostream>
 #include <ctime>
 #include <stdlib.h>
+#include <stdio.h>
 #include "Session.h"
 
 using namespace std;
 
 	Session::Session()
 	{
-		debut = fin = derniere = get_time();
+		debut = fin = get_time();
 	}
 
 	void Session::set_debut(string s)
@@ -40,7 +41,8 @@ using namespace std;
 		return derniere;
 	}
 	
-	// Fonction qui renvoie la date m/j/a h:min:s
+	
+	// Fonction qui renvoie la date a-m-j h:min:s
 	string Session::get_time()
 	{
 		time_t rawtime;
@@ -51,98 +53,40 @@ using namespace std;
 		time (&rawtime);
 		timeinfo = localtime (&rawtime);
 
-		strftime (buffer,80,"%x %X",timeinfo);
+		strftime (buffer,80,"%F %T",timeinfo);
 		s = buffer;
 		return s;
 	}
 	
-	// Fonction qui compare les jours de deux dates (début,fin)
-	int Session::compare_day(string d, string d2)
+	// Fonction qui calcule la différence entre deux temps donnés
+	double Session::Diff_time(string fin, string debut)
 	{
-		string str;
-		string str2;
-		str = d.substr(3,2);
-		str2 = d2.substr(3,2);
-		int tmp;
-		int tmp2;
-		tmp = atoi(str.c_str());	//stoi = atoi en plus récent
-		tmp2 = atoi(str2.c_str());
-		if(tmp == tmp2)
-		{
-			return 0;
-		}
-		else
-		{
-			return (tmp2 - tmp);
-		}
+		struct tm tm1;
+		struct tm tm2;
+		 
+		char buf1[255], buf2[255];
+		double dif;
+		 
+		strptime(fin.c_str(), "%Y-%m-%d %H:%M:%S", &tm1);
+		strftime(buf1, sizeof(buf1), "%d %b %Y %H:%M:%S", &tm1);
+		puts(buf1);
+		 
+		strptime(debut.c_str(), "%Y-%m-%d %H:%M:%S", &tm2);
+		strftime(buf2, sizeof(buf2), "%d %b %Y %H:%M:%S", &tm2);
+		puts(buf2);
+		time_t  T1= mktime(&tm1);
+		time_t T2 = mktime(&tm2);
+		dif = difftime(T2,T1);
+		return dif;
 	}
+
 	
-	// Fonction qui compare les mois de deux dates (début, fin)
-	int Session::compare_month(string m, string m2)
-	{
-		string str;
-		string str2;
-		str = m.substr(0,2);
-		str2 = m2.substr(0,2);
-		int tmp;
-		int tmp2;
-		tmp = atoi(str.c_str());
-		tmp2 = atoi(str2.c_str());
-		if(tmp == tmp2)
-		{
-			return 0;
-		}
-		else
-		{
-			return (tmp2 - tmp);
-		}
-	}
 	
-	// Fonction qui compare les heures de deux dates (début, fin)
-	int Session::compare_hours(string h, string h2)
-	{
-		string str;
-		string str2;
-		str = h.substr(9,2);
-		str2 = h2.substr(9,2);
-		int tmp;
-		int tmp2;
-		tmp = atoi(str.c_str());
-		tmp2 = atoi(str2.c_str());
-		if(tmp == tmp2)
-		{
-			return 0;
-		}
-		else
-		{
-			return (tmp2 - tmp);
-		}
-	}
 	
-	// Fonction qui compare les minutes de deux dates (début, fin)
-	int Session::compare_minutes(string mi, string mi2)
-	{
-		string str;
-		string str2;
-		str = mi.substr(12,2);
-		str2 = mi2.substr(12,2);
-		int tmp;
-		int tmp2;
-		tmp = atoi(str.c_str());
-		tmp2 = atoi(str2.c_str());
-		if(tmp == tmp2)
-		{
-			return 0;
-		}
-		else if ((tmp2 - tmp) < 0)
-		{
-			return (-1 * (tmp2-tmp));
-		} 
-		else
-		{
-			return (tmp2 - tmp);
-		}
-	}
+	
+	
+	
+	
 	
 	//TODO : faire le mixe des fonctions de comparaison des dates afin de vérifier comment gérer les caractéristiques plus tard. Plus vérifier par rapport aux changements de mois/jour/heure
 	
