@@ -6,16 +6,13 @@
 #include "Tamagotchi.h"
 #include "text.h"
 
-
-
 using namespace std;
 using namespace sf;
-
 
 int main()
 {
 
-    // Initialisation du jeu
+    // Initialisation du jeu et de sa gestion
     Engine game;
     Tamagotchi t;
     
@@ -30,6 +27,8 @@ int main()
     button goSleep("sleep", Vector2f(350, 500));
     button goOut("out", Vector2f(650, 500));
     button proceed("continue", Vector2f(500, 300));
+    button dayBackGround("day", Vector2f(0, 0));
+    button nightBackGround("night", Vector2f(0, 0));
       
     //button newgamepause("newgame", Vector2f(250, 450));
 
@@ -42,7 +41,11 @@ int main()
     text faim("Faim :", red, 1000, 250);
     text proprete("Proprete :", white, 1000, 300);
     text fatigue("Fatigue :", white, 1000, 350);
-    text humeur("Humeur :", white, 1000, 400);   
+    text humeur("Humeur :", white, 1000, 400);
+
+
+    // Initialisation de la gestion du temps
+    Clock clock;
 
 
     /////////////////PARTIE INTERFACE GRAPHIQUE/////////////////////
@@ -66,18 +69,22 @@ int main()
         }
 
         window.clear();
-        backGround.drawButton(window);
+        
+        // Recupération du temps écoulé a chaque tour de boucle
+        Time elapsed = clock.getElapsedTime();
 
         if(game.getGameState() == "MENU1") {
+
+            backGround.drawButton(window);
             newgame.drawButton(window);
             cont.drawButton(window);
 
             if(newgame.isClicked(window)) {
-                game.update(t, life);
+                game.update(t, life, faim, proprete, fatigue, humeur, elapsed);
                 game.setGameState("RUN");
             }else if(cont.isClicked(window)) {
                 game.load(t);
-                game.update(t, life);
+                game.update(t, life, faim, proprete, fatigue, humeur, elapsed);
                 game.setGameState("RUN");
             }
         }   
@@ -85,25 +92,36 @@ int main()
 
         if(game.getGameState() == "RUN") {
 
+            dayBackGround.drawButton(window);
+
+            if(game.getNightMode() == 1)
+                nightBackGround.drawButton(window);
+
+            // Affichage des différents éléments d'information du tamagotchi
             life.drawText(window);
             faim.drawText(window);
             proprete.drawText(window);
             fatigue.drawText(window);
             humeur.drawText(window);
 
+            // Affichage des boutons d'action
             food.drawButton(window);
             goSleep.drawButton(window);
             goOut.drawButton(window);
 
-            if(food.isClicked(window)) {
+            // Si donner a manger et cliqué, et que le temps écoulé est superieur a 5 secondes
+            if(food.isClicked(window) && elapsed.asSeconds() > 5) {
 
                 t.set_vie(t.get_vie() + 20);
-                cout << "Action effectue ! " << endl;
+                elapsed = clock.restart();
                 game.setGameState("WAIT");
 
-            }else if(goSleep.isClicked(window)) {
+            }else if(goSleep.isClicked(window) && elapsed.asSeconds() > 5) {
 
-            }else if(goOut.isClicked(window)) {
+                
+                elapsed = clock.restart();
+
+            }else if(goOut.isClicked(window) && elapsed.asSeconds() > 60) {
 
             }
         }
@@ -113,14 +131,11 @@ int main()
             proceed.drawButton(window);
 
             if(proceed.isClicked(window)) {
-                game.update(t, life);
+                game.update(t, life, faim, proprete, fatigue, humeur, elapsed);
                 game.save(t);
                 game.setGameState("RUN");
             }
         }
-
-
-
         
         window.display();
     }

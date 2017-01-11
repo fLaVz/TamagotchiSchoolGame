@@ -13,9 +13,10 @@
 
 class Engine {
 
+	int nightMode;
 	std::string m_gameState;
 	Session s;
-	
+
 
 public: 
 
@@ -30,8 +31,9 @@ public:
 	void save(Tamagotchi t);
 
 
-	void action(std::string act);
-	void update(Tamagotchi & t, text & life);
+	int getNightMode();
+	void update(Tamagotchi & t, text &life, text &faim, text &proprete, text &fatigue, text &humeur, sf::Time elapsed);
+
 	
 
 };

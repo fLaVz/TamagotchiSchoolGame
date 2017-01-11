@@ -2,10 +2,12 @@
 #include <sstream>
 
 using namespace std;
+using namespace sf;
 
 Engine::Engine() {
 
 	m_gameState = "MENU1";
+  nightMode = 0;
 
 }
 
@@ -21,9 +23,9 @@ string Engine::getGameState() {
 }
 
 
-void Engine::action(string act) {
+int Engine::getNightMode() {
 
-
+  return nightMode;
 }
 
 
@@ -106,16 +108,44 @@ void Engine::save(Tamagotchi t) {
 }
 
 
-void Engine::update(Tamagotchi & t, text & life) {
+void Engine::update(Tamagotchi & t, text &life, text &faim, text &proprete, text &fatigue, text &humeur, Time elapsed) {
 
   int tmp = t.get_vie();
-
   stringstream flux;
   flux << tmp;
-
   string conv = flux.str();
-
   life.addText(conv);
+
+  tmp = t.get_faim();
+  flux << tmp;
+  conv = flux.str();
+
+  faim.addText(conv);
+
+  tmp = t.get_proprete();
+  flux << tmp;
+  conv = flux.str();
+
+  proprete.addText(conv);
+
+  tmp = t.get_fatigue();
+  flux << tmp;
+  conv = flux.str();
+
+  fatigue.addText(conv);
+
+  tmp = t.get_humeur();
+  flux << tmp;
+  conv = flux.str();
+
+  humeur.addText(conv);
+
+
+  
+
+
+
 
 
 }
+

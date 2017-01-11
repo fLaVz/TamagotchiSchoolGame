@@ -8,7 +8,7 @@ text::text() {
 
     myfont.loadFromFile("arial.ttf");
     mytext.setFont(myfont);   
-  	mytext.setString("DEFAULT");
+  	mytext.setString("");
 
 }
 

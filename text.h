@@ -17,8 +17,6 @@ public:
 
 	void drawText(sf::RenderWindow & window);
 	void addText(std::string add);
-
-
 };
 
 #endif
