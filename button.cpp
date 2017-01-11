@@ -21,8 +21,11 @@ button::button(string name, Vector2f position) {
 	else
 		m_sprite.setTexture(m_texture);
 
-    if(name != "background")
-		m_sprite.setScale(0.6, 0.6);
+    size_t found;
+    found = name.find("backGround");
+
+    if(found == string::npos)
+        m_sprite.setScale(0.4, 0.4);
 
 }
 

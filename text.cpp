@@ -35,7 +35,6 @@ void text::drawText(RenderWindow & window) {
 
 void text::addText(string add) {
 
-    string done = mytext.getString();
-    done.replace(5, 3, add);
-    mytext.setString(done);
+    mytext.setString("");
+    mytext.setString(add);
 }

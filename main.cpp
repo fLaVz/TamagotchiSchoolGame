@@ -9,8 +9,7 @@
 using namespace std;
 using namespace sf;
 
-int main()
-{
+int main() {
 
     // Initialisation du jeu et de sa gestion
     Engine game;
@@ -20,15 +19,24 @@ int main()
     RenderWindow window(VideoMode(1280, 720), "TAMAGOTCHI v1.0");
     
     // Initialisation des boutons
-    button backGround("background", Vector2f(0, 0));
+    button backGround("backGround", Vector2f(0, 0));
     button newgame("newgame", Vector2f(280, 300));
     button cont("continue", Vector2f(700, 300));
-    button food("eat", Vector2f(50, 500));
-    button goSleep("sleep", Vector2f(350, 500));
-    button goOut("out", Vector2f(650, 500));
+    button food("eat", Vector2f(50, 550));
+    button goSleep("sleep", Vector2f(250, 550));
+    button goOut("out", Vector2f(450, 550));
     button proceed("continue", Vector2f(500, 300));
-    button dayBackGround("day", Vector2f(0, 0));
-    button nightBackGround("night", Vector2f(0, 0));
+    button dayBackGround("daybackGround", Vector2f(0, 0));
+    button nightBackGround("nightbackGround", Vector2f(0, 0));
+
+    // Initialisation des images par rapport aux points d'etats
+    button coeur("coeur", Vector2f(1130, 200));
+    button fourk("fork", Vector2f(1130, 250));
+    button shower("shower", Vector2f(1130, 300));
+    button zzz("zzz", Vector2f(1130, 350));
+    button feel("feel", Vector2f(1130, 400));
+
+    button tama("tama", Vector2f(400, 350));
       
     //button newgamepause("newgame", Vector2f(250, 450));
 
@@ -37,15 +45,18 @@ int main()
     Color green = Color::Green;
     Color white = Color::White;
 
-    text life("Vie :", green, 1000, 200);
-    text faim("Faim :", red, 1000, 250);
-    text proprete("Proprete :", white, 1000, 300);
-    text fatigue("Fatigue :", white, 1000, 350);
-    text humeur("Humeur :", white, 1000, 400);
+    text life("100", green, 1200, 200);
+    text faim("0", red, 1200, 250);
+    text proprete("100", white, 1200, 300);
+    text fatigue("0", white, 1200, 350);
+    text humeur("100", white, 1200, 400);
 
 
     // Initialisation de la gestion du temps
     Clock clock;
+
+
+    // manger dormir jouer sortir laver
 
 
     /////////////////PARTIE INTERFACE GRAPHIQUE/////////////////////
@@ -93,9 +104,7 @@ int main()
         if(game.getGameState() == "RUN") {
 
             dayBackGround.drawButton(window);
-
-            if(game.getNightMode() == 1)
-                nightBackGround.drawButton(window);
+            tama.drawButton(window);
 
             // Affichage des différents éléments d'information du tamagotchi
             life.drawText(window);
@@ -103,6 +112,15 @@ int main()
             proprete.drawText(window);
             fatigue.drawText(window);
             humeur.drawText(window);
+
+            // Affichage des images descriptives
+            coeur.drawButton(window);
+            fourk.drawButton(window);
+            shower.drawButton(window);
+            zzz.drawButton(window);
+            feel.drawButton(window);
+
+
 
             // Affichage des boutons d'action
             food.drawButton(window);
@@ -118,23 +136,39 @@ int main()
 
             }else if(goSleep.isClicked(window) && elapsed.asSeconds() > 5) {
 
-                
+                t.set_fatigue(t.get_fatigue() + 20);
                 elapsed = clock.restart();
+                game.setGameState("SLEEP");
 
-            }else if(goOut.isClicked(window) && elapsed.asSeconds() > 60) {
+            }else if(goOut.isClicked(window) && elapsed.asSeconds() > 30) {
+
+                elapsed = clock.restart();
 
             }
         }
 
         if(game.getGameState() == "WAIT") {
-            
-            proceed.drawButton(window);
 
-            if(proceed.isClicked(window)) {
+                proceed.drawButton(window);
+
+                // Aurait pu etre géré avec clock mais fait de facon a economiser des ressources -> rallonge le code
+                if(proceed.isClicked(window)) {
+                    game.update(t, life, faim, proprete, fatigue, humeur, elapsed);
+                    game.save(t);
+                    game.setGameState("RUN");
+                }
+        }
+
+        if(game.getGameState() == "SLEEP") {
+
+            nightBackGround.drawButton(window);
+            tama.drawButton(window);
+
+            if(elapsed.asSeconds() > 20) {
                 game.update(t, life, faim, proprete, fatigue, humeur, elapsed);
-                game.save(t);
                 game.setGameState("RUN");
             }
+
         }
         
         window.display();

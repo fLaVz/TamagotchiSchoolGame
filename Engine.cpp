@@ -7,7 +7,6 @@ using namespace sf;
 Engine::Engine() {
 
 	m_gameState = "MENU1";
-  nightMode = 0;
 
 }
 
@@ -21,13 +20,6 @@ string Engine::getGameState() {
 
 	return m_gameState;
 }
-
-
-int Engine::getNightMode() {
-
-  return nightMode;
-}
-
 
 void Engine::load(Tamagotchi & t) {
 
@@ -116,36 +108,47 @@ void Engine::update(Tamagotchi & t, text &life, text &faim, text &proprete, text
   string conv = flux.str();
   life.addText(conv);
 
+  // Reinitialise les flux
+  flux.str("");
+
   tmp = t.get_faim();
   flux << tmp;
   conv = flux.str();
-
   faim.addText(conv);
+
+  flux.str("");
 
   tmp = t.get_proprete();
   flux << tmp;
   conv = flux.str();
-
   proprete.addText(conv);
+
+  flux.str("");
 
   tmp = t.get_fatigue();
   flux << tmp;
   conv = flux.str();
-
   fatigue.addText(conv);
+
+  flux.str("");
 
   tmp = t.get_humeur();
   flux << tmp;
   conv = flux.str();
-
   humeur.addText(conv);
 
+  flux.str("");
 
-  
+
+
+
+
+
+
+
 
 
 
 
 
 }
-
