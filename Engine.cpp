@@ -21,6 +21,27 @@ string Engine::getGameState() {
 	return m_gameState;
 }
 
+void Engine::checkDiff(double diff, Tamagotchi &t) {
+
+  if(diff <= 7200) {
+    cout << "Not enough time between 2 sessions to affect the stats" << endl;
+  }
+  else if(diff >= 7200){
+
+    int cmp = (diff/7200)*10;
+
+    t.set_vie(t.get_vie() - cmp);
+    t.set_faim(t.get_faim() + cmp);
+    t.set_proprete(t.get_proprete() - cmp);
+    t.set_humeur(t.get_humeur() - cmp);
+    t.set_fatigue(t.get_fatigue() + cmp);
+
+  }
+}
+
+
+
+
 void Engine::load(Tamagotchi & t) {
 
   string chaine[10];
@@ -62,10 +83,30 @@ void Engine::load(Tamagotchi & t) {
     t.set_experience(num[5]);
     t.set_multiplicateur(num[6]);
 
+    ifstream filedate("saved/date.dat", ios::in);
+    string linedate;
+
+    if(filedate) {
+      getline(filedate, linedate, '\n');
+      filedate.close();
+    }
+
+    double diff = s.Diff_time(linedate, s.get_time());
+
+    cout << "Diftime : " << diff << endl;
+
+    checkDiff(diff, t);
+
+ 
     cout << "Game successfully loaded" << endl;
 }
 
+
+
+
 void Engine::save(Tamagotchi t) {
+
+  // Sauvegarde des infos du tama
 
   string path = "saved/save.dat";
 
@@ -95,12 +136,22 @@ void Engine::save(Tamagotchi t) {
 
         file.close();
 
+    // Sauvegarde de la date
+
+    string pathdate = "saved/date.dat";
+
+    ofstream filedate(pathdate.c_str(), ios::out | ios::trunc);
+
+    if(filedate) {
+      filedate << s.get_time();
+    }
+
   cout << "game succesfully saved !" << endl;
 
 }
 
 
-void Engine::update(Tamagotchi & t, text &life, text &faim, text &proprete, text &fatigue, text &humeur, Time elapsed) {
+int Engine::update(Tamagotchi & t, text &life, text &faim, text &proprete, text &fatigue, text &humeur, Time &elapsed, Clock &clock) {
 
   int tmp = t.get_vie();
   stringstream flux;
@@ -139,16 +190,112 @@ void Engine::update(Tamagotchi & t, text &life, text &faim, text &proprete, text
 
   flux.str("");
 
+  
+
+
+
+  // Acces en fonction du temps
+  if(elapsed.asSeconds() > 30) {
+    t.set_faim(t.get_faim() + 10);
+    elapsed = clock.restart();
+    save(t);
+  }
+
+  if(elapsed.asSeconds() > 60) {
+    t.set_proprete(t.get_proprete() - 10);
+    elapsed = clock.restart();
+    save(t);
+  }  
+
+  if(elapsed.asSeconds() > 90) {
+    t.set_humeur(t.get_humeur() - 10);
+    elapsed = clock.restart();
+    save(t);
+  }
+
+  /*if(elapsed.asSeconds() > 1) {
+    t.set_vie(t.get_vie() - 20);
+    elapsed = clock.restart();
+    save(t);
+  }*/
+
+  if(isDead(t)) {
+    return 1;
+  }
+
+  return 0;
+}
 
 
 
 
 
+int Engine::eat(Tamagotchi &t) {
+
+  if(t.get_vie() >= 100) {
+    cout << "Full life" << endl;
+  }else {
+    t.set_vie(t.get_vie() + 10);
+  }
+
+  if(0 < t.get_faim() < 20) {
+    return 0;
+  }else if(t.get_faim() >= 20) {
+    t.set_faim(t.get_faim() - 20);
+  }else{
+    return 1;
+  }
+
+  return 0;
+}
+
+int Engine::wash(Tamagotchi &t) {
+
+  if(t.get_proprete() <= 80) {
+    t.set_proprete(t.get_proprete() + 20);
+  }else {
+    t.set_humeur(t.get_humeur() - 40);
+    cout << "Already clean, but bored by the shower ):" << endl;
+  }
+}
+
+
+int Engine::play(Tamagotchi &t) {
+  if(t.get_humeur() <= 80) {
+
+    t.set_humeur(t.get_humeur() + 20);
+    t.set_faim(t.get_faim() + 20);
+  }else {
+    t.set_vie(t.get_vie() - 40);
+    cout << "Already enough happy !, but it hurts !" << endl;
+  }
+
+
+}
+
+
+int Engine::sleep(Tamagotchi &t) {
+
+  if(t.get_fatigue() >= 20) {
+    t.set_fatigue(t.get_fatigue() - 20);
+  }else{
+    cout << "Not tired" << endl;
+  }
+
+}
 
 
 
+bool Engine::isDead(Tamagotchi  &t) {
+
+  if(t.get_vie() == 0
+    || t.get_faim() == 100
+    || t.get_proprete() == 0
+    || t.get_humeur() == 0) {
+
+    return true;
+  }
 
 
-
-
+  return false;
 }

@@ -9,12 +9,12 @@ class Session
 	
 	public:
 	Session();
-	void set_debut(std::string);
+	void set_debut(std::string debut);
 	std::string get_debut();
-	void set_fin(std::string);
+	void set_fin(std::string fin);
 	std::string get_fin();
-	void set_derniere(std::string);
+	void set_derniere(std::string derniere);
 	std::string get_derniere();
 	std::string get_time();
-	double Diff_time(std::string , std::string);
+	double Diff_time(std::string fin, std::string debut);
 };

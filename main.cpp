@@ -15,6 +15,13 @@ int main() {
     Engine game;
     Tamagotchi t;
     
+    string name;
+    cout << "Entrez le nom de votre Tamagotchi ! " << endl;
+    cin >> name;
+    t.set_nom(name);
+
+
+
     // Initialisation de la fenetre de rendu
     RenderWindow window(VideoMode(1280, 720), "TAMAGOTCHI v1.0");
     
@@ -24,7 +31,8 @@ int main() {
     button cont("continue", Vector2f(700, 300));
     button food("eat", Vector2f(50, 550));
     button goSleep("sleep", Vector2f(250, 550));
-    button goOut("out", Vector2f(450, 550));
+    button play("play", Vector2f(450, 550));
+    button wash("wash", Vector2f(650, 550));
     button proceed("continue", Vector2f(500, 300));
     button dayBackGround("daybackGround", Vector2f(0, 0));
     button nightBackGround("nightbackGround", Vector2f(0, 0));
@@ -56,7 +64,7 @@ int main() {
     Clock clock;
 
 
-    // manger dormir jouer sortir laver
+    // manger dormir jouer laver
 
 
     /////////////////PARTIE INTERFACE GRAPHIQUE/////////////////////
@@ -91,11 +99,11 @@ int main() {
             cont.drawButton(window);
 
             if(newgame.isClicked(window)) {
-                game.update(t, life, faim, proprete, fatigue, humeur, elapsed);
+                
                 game.setGameState("RUN");
             }else if(cont.isClicked(window)) {
                 game.load(t);
-                game.update(t, life, faim, proprete, fatigue, humeur, elapsed);
+                //game.update(t, life, faim, proprete, fatigue, humeur, elapsed);
                 game.setGameState("RUN");
             }
         }   
@@ -120,40 +128,47 @@ int main() {
             zzz.drawButton(window);
             feel.drawButton(window);
 
-
-
             // Affichage des boutons d'action
             food.drawButton(window);
             goSleep.drawButton(window);
-            goOut.drawButton(window);
+            play.drawButton(window);
+            wash.drawButton(window);
+
 
             // Si donner a manger et cliqué, et que le temps écoulé est superieur a 5 secondes
             if(food.isClicked(window) && elapsed.asSeconds() > 5) {
 
-                t.set_vie(t.get_vie() + 20);
+                game.eat(t);
                 elapsed = clock.restart();
                 game.setGameState("WAIT");
 
             }else if(goSleep.isClicked(window) && elapsed.asSeconds() > 5) {
 
-                t.set_fatigue(t.get_fatigue() + 20);
+                game.sleep(t);
                 elapsed = clock.restart();
                 game.setGameState("SLEEP");
 
-            }else if(goOut.isClicked(window) && elapsed.asSeconds() > 30) {
-
+            }else if(play.isClicked(window) && elapsed.asSeconds() > 5) {
+                game.play(t);
                 elapsed = clock.restart();
+                game.setGameState("WAIT");
+
+            }else if(wash.isClicked(window) && elapsed.asSeconds() > 5) {
+                game.wash(t);
+                elapsed = clock.restart();
+                game.setGameState("WAIT");
 
             }
         }
 
         if(game.getGameState() == "WAIT") {
 
+                backGround.drawButton(window);
                 proceed.drawButton(window);
 
                 // Aurait pu etre géré avec clock mais fait de facon a economiser des ressources -> rallonge le code
                 if(proceed.isClicked(window)) {
-                    game.update(t, life, faim, proprete, fatigue, humeur, elapsed);
+                    
                     game.save(t);
                     game.setGameState("RUN");
                 }
@@ -165,12 +180,18 @@ int main() {
             tama.drawButton(window);
 
             if(elapsed.asSeconds() > 20) {
-                game.update(t, life, faim, proprete, fatigue, humeur, elapsed);
                 game.setGameState("RUN");
             }
 
         }
-        
+        int r = game.update(t, life, faim, proprete, fatigue, humeur, elapsed, clock);
+        if(r == 1) {
+            cout << "GAAAAAAAAAAME OVERRRRRR" << endl;
+            window.close();
+        }
+
+
+
         window.display();
     }
     ////////////////FIN INTERFACE GRAPHIQUE///////////////////

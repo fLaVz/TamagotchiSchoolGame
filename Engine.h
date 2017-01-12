@@ -28,9 +28,16 @@ public:
 	void load(Tamagotchi & t);
 	void save(Tamagotchi t);
 
-	void update(Tamagotchi & t, text &life, text &faim, text &proprete, text &fatigue, text &humeur, sf::Time elapsed);
+	int update(Tamagotchi & t, text &life, text &faim, text &proprete, text &fatigue, text &humeur, sf::Time &elapsed, sf::Clock &clock);
+	bool isDead(Tamagotchi &t);
+	void checkDiff(double diff, Tamagotchi &t);
 
-	
+	int eat(Tamagotchi &t);
+	int wash(Tamagotchi &t);
+	int play(Tamagotchi &t);
+	int sleep(Tamagotchi &t);
+
+
 
 };
 #endif

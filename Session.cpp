@@ -59,7 +59,7 @@ using namespace std;
 	}
 	
 	// Fonction qui calcule la différence entre deux temps donnés
-	double Session::Diff_time(string fin, string debut)
+	double Session::Diff_time(string fins, string debuts)
 	{
 		struct tm tm1;
 		struct tm tm2;
@@ -67,14 +67,14 @@ using namespace std;
 		char buf1[255], buf2[255];
 		double dif;
 		 
-		strptime(fin.c_str(), "%Y-%m-%d %H:%M:%S", &tm1);
+		strptime(fins.c_str(), "%Y-%m-%d %H:%M:%S", &tm1);
 		strftime(buf1, sizeof(buf1), "%d %b %Y %H:%M:%S", &tm1);
 		puts(buf1);
 		 
-		strptime(debut.c_str(), "%Y-%m-%d %H:%M:%S", &tm2);
+		strptime(debuts.c_str(), "%Y-%m-%d %H:%M:%S", &tm2);
 		strftime(buf2, sizeof(buf2), "%d %b %Y %H:%M:%S", &tm2);
 		puts(buf2);
-		time_t  T1= mktime(&tm1);
+		time_t T1 = mktime(&tm1);
 		time_t T2 = mktime(&tm2);
 		dif = difftime(T2,T1);
 		return dif;
