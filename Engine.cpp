@@ -195,25 +195,28 @@ int Engine::update(Tamagotchi & t, text &life, text &faim, text &proprete, text 
 
 
   // Acces en fonction du temps
-  if(elapsed.asSeconds() > 30) {
+  if(elapsed.asSeconds() > 10) {
     t.set_faim(t.get_faim() + 10);
+    t.set_proprete(t.get_proprete() - 10); 
+    t.set_humeur(t.get_humeur() - 10);
+
     elapsed = clock.restart();
     save(t);
   }
 
-  if(elapsed.asSeconds() > 60) {
+  /*if(elapsed.asSeconds() > 15) {
     t.set_proprete(t.get_proprete() - 10);
     elapsed = clock.restart();
     save(t);
   }  
 
-  if(elapsed.asSeconds() > 90) {
+  if(elapsed.asSeconds() > 15) {
     t.set_humeur(t.get_humeur() - 10);
     elapsed = clock.restart();
     save(t);
   }
 
-  /*if(elapsed.asSeconds() > 1) {
+  if(elapsed.asSeconds() > 1) {
     t.set_vie(t.get_vie() - 20);
     elapsed = clock.restart();
     save(t);
@@ -238,7 +241,9 @@ int Engine::eat(Tamagotchi &t) {
     t.set_vie(t.get_vie() + 10);
   }
 
-  if(0 < t.get_faim() < 20) {
+  cout << "FAIMMMMMMMM" << t.get_faim() << endl; 
+
+  if(t.get_faim() < 20) {
     return 0;
   }else if(t.get_faim() >= 20) {
     t.set_faim(t.get_faim() - 20);

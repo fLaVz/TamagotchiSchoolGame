@@ -134,7 +134,7 @@ int main() {
             play.drawButton(window);
             wash.drawButton(window);
 
-
+            //***************************** ACTIONS
             // Si donner a manger et cliqué, et que le temps écoulé est superieur a 5 secondes
             if(food.isClicked(window) && elapsed.asSeconds() > 5) {
 
@@ -161,6 +161,7 @@ int main() {
             }
         }
 
+        //************************ PROCEED
         if(game.getGameState() == "WAIT") {
 
                 backGround.drawButton(window);
@@ -174,16 +175,18 @@ int main() {
                 }
         }
 
+        //**************************** SLEEP MODE
         if(game.getGameState() == "SLEEP") {
 
             nightBackGround.drawButton(window);
             tama.drawButton(window);
 
-            if(elapsed.asSeconds() > 20) {
+            if(elapsed.asSeconds() > 10) {
                 game.setGameState("RUN");
             }
 
         }
+        //************************ UPDATE APP
         int r = game.update(t, life, faim, proprete, fatigue, humeur, elapsed, clock);
         if(r == 1) {
             cout << "GAAAAAAAAAAME OVERRRRRR" << endl;
