@@ -199,6 +199,7 @@ int Engine::update(Tamagotchi & t, text &life, text &faim, text &proprete, text 
     t.set_faim(t.get_faim() + 10);
     t.set_proprete(t.get_proprete() - 10); 
     t.set_humeur(t.get_humeur() - 10);
+    t.set_fatigue(t.get_fatigue() + 10);
 
     elapsed = clock.restart();
     save(t);
@@ -293,10 +294,10 @@ int Engine::sleep(Tamagotchi &t) {
 
 bool Engine::isDead(Tamagotchi  &t) {
 
-  if(t.get_vie() == 0
-    || t.get_faim() == 100
-    || t.get_proprete() == 0
-    || t.get_humeur() == 0) {
+  if(t.get_vie() <= 0
+    || t.get_faim() >= 100
+    || t.get_proprete() <= 0
+    || t.get_humeur() <= 0) {
 
     return true;
   }

@@ -14,13 +14,6 @@ int main() {
     // Initialisation du jeu et de sa gestion
     Engine game;
     Tamagotchi t;
-    
-    string name;
-    cout << "Entrez le nom de votre Tamagotchi ! " << endl;
-    cin >> name;
-    t.set_nom(name);
-
-
 
     // Initialisation de la fenetre de rendu
     RenderWindow window(VideoMode(1280, 720), "TAMAGOTCHI v1.0");
