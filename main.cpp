@@ -38,8 +38,6 @@ int main() {
     button feel("feel", Vector2f(1130, 400));
 
     button tama("tama", Vector2f(400, 350));
-      
-    //button newgamepause("newgame", Vector2f(250, 450));
 
     // Initialisation des texts afichés a l'écran avec leur couleurs
     Color red = Color::Red;
@@ -92,7 +90,10 @@ int main() {
             cont.drawButton(window);
 
             if(newgame.isClicked(window)) {
-                
+                string name;
+                cout << "Entrez le nom de votre Tamagotchi ! " << endl;
+                cin >> name;
+                t.set_nom(name);
                 game.setGameState("RUN");
             }else if(cont.isClicked(window)) {
                 game.load(t);
@@ -101,7 +102,7 @@ int main() {
             }
         }   
 
-
+        //******************************* INGAME
         if(game.getGameState() == "RUN") {
 
             dayBackGround.drawButton(window);
